@@ -13,3 +13,6 @@ def historial(request):
 
 def carrito(request):
     return render(request, 'app/carrito.html')
+
+def donacion(request):
+    return render(request, 'app/donaciones.html')
