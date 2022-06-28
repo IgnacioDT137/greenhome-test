@@ -1,0 +1,52 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'app/css/donacionStyle.css' %}">
+{% endblock %}
+
+{% block title %}
+Suscripción para donación
+{% endblock %}
+
+{% block content %}
+<script src="{% static 'app/js/donacion.js' %}"></script> 
+<div id="contenido">
+    <form action="" id="donar">
+        <div id="input">
+            <h1 style="text-align: center;">Suscripcion para donacion</h1>
+            <p> </p>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">E-Mail de recibo</span>
+                <input id="emailinput" type="email" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <h5 id="mensaje" style="display: none; color: red;">Por favor ingrese email</h5>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Monto mensual</span>
+                <input id="monto" type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <h5 id="mensaje2" style="display: none; color: red;">Por favor ingrese monto</h5>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Nro. Tarjeta</span>
+                <input id="numerotarjeta" type="number" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <h5 id="mensaje3" style="display: none; color: red;">Por favor ingrese tarjeta</h5>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">CVV</span>
+                <input id="cvv" type="password" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <h5 id="mensaje4" style="display: none; color: red;">Por favor ingrese CVV</h5>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Fecha de vencimiento</span>
+                <input id="fecha" type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <h5 id="mensaje5" style="display: none; color: red;">Por favor ingrese fecha de vencimiento</h5>
+            <button type="submit" class="btn btn-success" href="donacion.html" role="button">Confirmar</button>
+        </div>
+</div>
+{% endblock %}

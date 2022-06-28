@@ -1,0 +1,34 @@
+#input{
+    width: 65%;
+    background-color: greenyellow;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    
+}
+#donar{
+    padding-top: 100px;
+    padding-bottom: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 700px){
+    
+    #input{
+        width: 95%;
+    }
+
+}
+
+.error {
+    border: 2px red solid !important;
+    background-color: #ff7474 !important;
+}
+
+.ok {
+    border: 2px green solid !important;
+    background-color: #74ffb5 !important;
+}
