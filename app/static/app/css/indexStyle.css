@@ -1,0 +1,43 @@
+#contenido{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+@media only screen and (min-width: 1080px){
+    .producto{
+        width: 30%;
+    }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 1080px){
+    .producto{
+        width: 44%;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    .producto{
+        width: 95%;
+    }
+}
+
+.producto {
+    display: flex;
+    flex-direction: column;
+    background-color: greenyellow;
+    text-align: center;
+    align-items: center;
+    padding: 0 30px 10px 30px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 25px;
+    color: green;
+}
+
+.producto > img{
+    width: 120px;
+    height: 120px;
+    padding-bottom: 10px;
+}

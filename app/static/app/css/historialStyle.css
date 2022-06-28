@@ -1,0 +1,47 @@
+#contenido{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#historial{
+    background-color: greenyellow;
+    text-align: center;
+    width: 50%;
+    align-items: center;
+    padding: 10px 30px 10px 30px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border-radius: 25px;
+}
+#historial > p {
+    color: green;
+}
+#historial > h5{
+    color: green;
+}
+#historial > h4{
+    color: green;
+}
+#historial > img {
+    height: 200px;
+    width: 200px;
+}
+
+@media only screen and (min-width: 1080px){
+    #contenido > div{
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 1080px){
+    #contenido > div{
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    #contenido > div{
+        width: 95%;
+    }
+}

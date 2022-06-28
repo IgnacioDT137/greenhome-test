@@ -1,0 +1,84 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'app/css/carritoStyle.css' %}">
+{% endblock %}
+
+{% block title %}
+Carrito de compras
+{% endblock %}
+
+{% block content %}
+<div id="contenido">
+    <div class="titulo">
+        <h5>TU CARRITO DE COMPRAS</h5>
+        <h5>TOTAL: $67000</h5>
+        <button class="btn btn-primary" id="btn-compra">Realizar Compra</button>
+    </div>
+
+    <div class="added">
+        <div class="addedcol">
+            <h5>MANGUERA</h5>
+            <img src="{% static 'app/img/manguera.jpg' %}" alt="MANGUERA">
+        </div>
+        <div class="addedcol">
+            <h5>CANTIDAD: </h5>
+            <h5>2</h5>
+        </div>
+        <div class="addedcol">
+            <h5>TOTAL:</h5>
+            <h5>$50000</h5>
+        </div>
+        <button class="btn btn-danger" id="btn-borrar"><img src="{% static 'app/img/borrar.png' %}" alt="borrar"></button>
+    </div>
+
+    <div class="added">
+        <div class="addedcol">
+            <h5>MACETA</h5>
+            <img src="{% static 'app/img/maceta.jpg' %}" alt="MACETA">
+        </div>
+        <div class="addedcol">
+            <h5>CANTIDAD: </h5>
+            <h5>4</h5>
+        </div>
+        <div class="addedcol">
+            <h5>TOTAL:</h5>
+            <h5>$2000</h5>
+        </div>
+        <button class="btn btn-danger" id="btn-borrar"><img src="{% static 'app/img/borrar.png' %}" alt="borrar"></button>
+    </div>
+
+    <div class="added">
+        <div class="addedcol">
+            <h5>TIJERAS</h5>
+            <img src="{% static 'app/img/tijeras.jpg' %}" alt="TIJERAS">
+        </div>
+        <div class="addedcol">
+            <h5>CANTIDAD: </h5>
+            <h5>1</h5>
+        </div>
+        <div class="addedcol">
+            <h5>TOTAL:</h5>
+            <h5>$9000</h5>
+        </div>
+        <button class="btn btn-danger" id="btn-borrar"><img src="{% static 'app/img/borrar.png' %}" alt="borrar"></button>
+    </div>
+
+    <div class="added">
+        <div class="addedcol">
+            <h5>SEMILLAS DE <br> FLORES</h5>
+            <img src="{% static 'app/img/semillas de flores.jpg' %}" alt="FLORES">
+        </div>
+        <div class="addedcol">
+            <h5>CANTIDAD: </h5>
+            <h5>3</h5>
+        </div>
+        <div class="addedcol">
+            <h5>TOTAL:</h5>
+            <h5>$6000</h5>
+        </div>
+        <button class="btn btn-danger" id="btn-borrar"><img src="{% static 'app/img/borrar.png' %}" alt="borrar"></button>
+    </div>
+</div>
+{% endblock %}

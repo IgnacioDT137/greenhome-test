@@ -1,0 +1,24 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'app/css/crudsStyle.css' %}">
+{% endblock %}
+
+{% block title %}
+Cruds
+{% endblock %}
+
+{% block content %}
+<div id="contenido">              
+    <div id="crud">
+        <div id="imagen"><img src="{% static 'app/img/depot.png' %}" alt="productos"></div>
+        <a type="button" class="btn-success" href="">Abrir CRUD de productos</a>
+    </div>
+
+    <div id="crud">
+      <div id="imagen"><img src="{% static 'app/img/promo.png' %}" alt="productos"></div>
+      <a type="button" class="btn-success" href="">Abrir CRUD de promociones</a>
+    </div>
+</div>
+{% endblock %}
