@@ -19,3 +19,6 @@ def donacion(request):
 
 def loginForm(request):
     return render(request, 'app/login.html')
+
+def regForm(request):
+    return render(request, 'app/registro.html')

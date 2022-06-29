@@ -9,4 +9,5 @@ urlpatterns = [
     path('carrito', carrito, name='carrito'),
     path('donar', donacion, name='donar'),
     path('loginForm', loginForm, name='loginForm'),
+    path('regForm', regForm, name='regForm'),
 ]
