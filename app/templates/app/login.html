@@ -1,0 +1,38 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'app/css/loginStyle.css' %}">
+{% endblock %}
+
+{% block title %}
+Iniciar sesión
+{% endblock %}
+
+{% block content %}
+<script src="{% static 'app/js/loginForm.js' %}"></script>
+<div id="contenido">
+    <form action="" id="form1" method="GET">
+        <div id="input">
+            <h1>Iniciar Sesion</h1>
+            <p> </p>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Usuario</span>
+                <input name="username" id="username" type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <h5 id="mensaje" style="display: none; color: red;">Por favor ingrese usuario</h5>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+                <input name="passwordinput" id="passwordinput" type="password" class="form-control"
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <h5 style="display: none; color: red;" id="mensaje2">Por favor ingrese contraseña</h5>
+            <button id="enviar" type="submit" class="btn btn-success">Iniciar
+                Sesion</button>
+            <br>
+            <a class="btn btn-primary" href="registro.html" role="button">Registrarse</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
