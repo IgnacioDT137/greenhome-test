@@ -8,4 +8,5 @@ urlpatterns = [
     path('historial', historial, name='historial'),
     path('carrito', carrito, name='carrito'),
     path('donar', donacion, name='donar'),
+    path('loginForm', loginForm, name='loginForm'),
 ]

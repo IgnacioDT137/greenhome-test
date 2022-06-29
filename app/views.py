@@ -16,3 +16,6 @@ def carrito(request):
 
 def donacion(request):
     return render(request, 'app/donaciones.html')
+
+def loginForm(request):
+    return render(request, 'app/login.html')
