@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from .models import *
 
 # Create your views here.
 
 def home(request):
-    return render(request, 'app/home.html')
+    productos = Producto.objects.all()
+    return render(request, 'app/home.html', {"productos":productos})
 
 def cruds(request):
     return render(request, 'app/cruds.html')
