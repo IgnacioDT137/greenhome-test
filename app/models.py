@@ -7,6 +7,7 @@ class Producto(models.Model):
     nombre = models.CharField(max_length=50, null=False)
     precio = models.IntegerField(null=False)
     stock = models.IntegerField(null=False)
+    imagen = models.CharField(max_length=1000, default='imagen')
 
 class Usuario(models.Model):
     username = models.CharField(primary_key=True, max_length=30)
