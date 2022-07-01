@@ -15,8 +15,8 @@ class Usuario(models.Model):
     pwd = models.CharField(max_length=12, null=False)
 
 class Promocion(models.Model):
-    id_promocion = models.IntegerField(primary_key=True)
-    codigo = models.CharField(max_length=8, null=False)
+    id_promocion = models.AutoField(primary_key=True)
+    codigo = models.CharField(max_length=8, null=False, unique=True)
     pct = models.FloatField(null=False)
     fecha_inicio = models.DateField(null=False)
     fecha_fin = models.DateField(null=False)
