@@ -84,3 +84,23 @@ def editProd(request, code):
         return redirect('crudProd')
     else:        
         return render(request, 'app/editProd.html', {"producto":producto})
+
+def editPromo(request, code):
+    promo = Promocion.objects.filter(id_promocion = code)
+    if request.method == 'POST':
+        oldPromo = Promocion.objects.get(id_promocion = code)
+        if request.POST['newcode'] != '':
+            oldPromo.codigo = request.POST['newcode']
+            oldPromo.save()
+        if str(request.POST['newpct']) != '':
+            oldPromo.pct = request.POST['newpct']
+            oldPromo.save()
+        if str(request.POST['newstart']) != '':
+            oldPromo.fecha_inicio = request.POST['newstart']
+            oldPromo.save()
+        if request.POST['newend'] != '':
+            oldPromo.fecha_fin = request.POST['newend']
+            oldPromo.save()
+        return redirect('crudPromo')
+    else:        
+        return render(request, 'app/editPromo.html', {"promo":promo})

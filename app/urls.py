@@ -16,5 +16,6 @@ urlpatterns = [
     path('delPromo/<code>', delPromo, name='delPromo'),
     path('addProducto', addProducto, name='addProducto'),
     path('delPro/<code>', delProd, name='delProd'),
-    path('editProd/<code>', editProd, name='editProd')
+    path('editProd/<code>', editProd, name='editProd'),
+    path('editPromo/<code>', editPromo, name='editPromo'),
 ]

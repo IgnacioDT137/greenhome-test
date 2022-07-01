@@ -1,0 +1,42 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block head %}
+<style>
+    #formDiv {
+        background-color: greenyellow;
+        color: green;
+        border-radius: 25px;
+    }
+
+    input {
+        margin-bottom: 7px !important;
+    }
+</style>
+{% endblock %}
+
+{% block title %}
+Editar producto
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-column align-items-center mt-4 pb-4" id="formDiv">
+    {% for p in promo %}
+    <h1 class="text-center">Editar Promoción</h1>
+    <label class="form-label">Código actual: {{p.codigo}}</label>
+    <label class="form-label">Descuento actual: {{p.pct}}%</label>
+    <label class="form-label">Fecha de inicio actual: {{p.fecha_inicio}} unidades</label>
+    <label class="form-label">Fecha de termino actual: {{p.fecha_fin}}</label>
+
+    <form method="post" class="w-50 d-flex flex-column align-items-center">
+        {% csrf_token %}
+        <input type="text" name="newcode" placeholder="Nuevo codigo" class="form-control">
+        <input type="number" name="newpct" placeholder="Nuevo porcentaje" class="form-control">
+        <input type="date" name="newstart" placeholder="Nueva fecha inicio" class="form-control">
+        <input type="date" name="newend" placeholder="Nueva fecha de termino" class="form-control">
+        <button class="btn btn-primary" type="submit">Modificar</button>
+        <a href="{% url 'crudPromo' %}" class="btn btn-warning">Volver</a>
+    </form>
+    {% endfor %}
+</div>
+{% endblock %}
