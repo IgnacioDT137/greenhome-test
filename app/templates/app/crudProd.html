@@ -28,7 +28,8 @@ Crud de productos
                 <th scope="col">IMAGEN (INSERTAR URL)</th>
                 <th scope="col">ACCIONES</th>
             </tr>
-            <form action="">
+            <form action="{% url 'addProducto' %}" method="post">
+                {% csrf_token %}
                 <td><input type="text" name="nombre" placeholder="Nombre producto" class="form-control"></td>
                 <td><input type="number" name="precio" placeholder="Precio" class="form-control"></td>
                 <td><input type="number" name="stock" placeholder="Stock" class="form-control"></td>
@@ -47,7 +48,7 @@ Crud de productos
                 </td>
                 <td>
                     <a href="" class="btn btn-primary">Modificar</a>
-                    <a href="" class="btn btn-danger">Eliminar</a>
+                    <a href="{% url 'delProd' p.id_producto %}" class="btn btn-danger">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}

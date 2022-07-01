@@ -14,4 +14,6 @@ urlpatterns = [
     path('crudPromo', crudPromo, name='crudPromo'),
     path('addPromo', addPromo, name='addPromo'),
     path('delPromo/<code>', delPromo, name='delPromo'),
+    path('addProducto', addProducto, name='addProducto'),
+    path('delPro/<code>', delProd, name='delProd'),
 ]

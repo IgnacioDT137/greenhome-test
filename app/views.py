@@ -1,4 +1,3 @@
-from urllib import request
 from django.shortcuts import redirect, render
 from .models import *
 
@@ -51,3 +50,19 @@ def delPromo(request, code):
     promo = Promocion.objects.filter(codigo = code)
     promo.delete()
     return redirect('crudPromo')
+
+def addProducto(request):
+    name = request.POST['nombre']
+    price = request.POST['precio']
+    stock = request.POST['stock']
+    img = request.POST['imagen']
+    newProd = Producto(nombre = name, precio = price, stock = stock, imagen = img)
+    newProd.save()
+    return redirect('crudProd')
+
+        
+
+def delProd(request, code):
+    prod = Producto.objects.filter(id_producto = code)
+    prod.delete()
+    return redirect('crudProd')
