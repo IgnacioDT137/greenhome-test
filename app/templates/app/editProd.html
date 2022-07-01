@@ -1,0 +1,42 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block head %}
+<style>
+    #formDiv {
+        background-color: greenyellow;
+        color: green;
+        border-radius: 25px;
+    }
+
+    input {
+        margin-bottom: 7px !important;
+    }
+</style>
+{% endblock %}
+
+{% block title %}
+Editar producto
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-column align-items-center mt-4 pb-4" id="formDiv">
+    {% for p in producto %}
+    <h1 class="text-center">Editar Producto</h1>
+    <label class="form-label">Nombre actual: {{p.nombre}}</label>
+    <label class="form-label">Precio actual: ${{p.precio}}</label>
+    <label class="form-label">Stock actual: {{p.stock}} unidades</label>
+    <label class="form-label">URL de imagen actual: {{p.imagen}}</label>
+
+    <form method="post" class="w-50 d-flex flex-column align-items-center">
+        {% csrf_token %}
+        <input type="text" name="newname" placeholder="Nuevo nombre" class="form-control">
+        <input type="number" name="newprice" placeholder="Nuevo precio" class="form-control">
+        <input type="number" name="newstock" placeholder="Nuevo stock" class="form-control">
+        <input type="text" name="newimage" placeholder="Nueva imagen (URL)" class="form-control">
+        <button class="btn btn-primary" type="submit">Modificar</button>
+        <a href="{% url 'crudProd' %}" class="btn btn-warning">Volver</a>
+    </form>
+    {% endfor %}
+</div>
+{% endblock %}

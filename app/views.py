@@ -58,11 +58,29 @@ def addProducto(request):
     img = request.POST['imagen']
     newProd = Producto(nombre = name, precio = price, stock = stock, imagen = img)
     newProd.save()
-    return redirect('crudProd')
-
-        
+    return redirect('crudProd')        
 
 def delProd(request, code):
     prod = Producto.objects.filter(id_producto = code)
     prod.delete()
     return redirect('crudProd')
+
+def editProd(request, code):
+    producto = Producto.objects.filter(id_producto = code)
+    if request.method == 'POST':
+        oldProd = Producto.objects.get(id_producto = code)
+        if request.POST['newname'] != '':
+            oldProd.nombre = request.POST['newname']
+            oldProd.save()
+        if str(request.POST['newprice']) != '':
+            oldProd.precio = request.POST['newprice']
+            oldProd.save()
+        if str(request.POST['newstock']) != '':
+            oldProd.stock = request.POST['newstock']
+            oldProd.save()
+        if request.POST['newimage'] != '':
+            oldProd.imagen = request.POST['newImage']
+            oldProd.save()
+        return redirect('crudProd')
+    else:        
+        return render(request, 'app/editProd.html', {"producto":producto})

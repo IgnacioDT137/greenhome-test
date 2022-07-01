@@ -47,7 +47,7 @@ Crud de productos
                     <img src="{{p.imagen}}" alt="prod_img" width="60px">
                 </td>
                 <td>
-                    <a href="" class="btn btn-primary">Modificar</a>
+                    <a href="{% url 'editProd' p.id_producto %}" class="btn btn-primary">Modificar</a>
                     <a href="{% url 'delProd' p.id_producto %}" class="btn btn-danger">Eliminar</a>
                 </td>
             </tr>
