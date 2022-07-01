@@ -1,0 +1,56 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block head %}
+<style>
+    #crud {
+        background-color: greenyellow;
+        border-radius: 25px;
+        color: green;
+    }
+</style>
+{% endblock %}
+
+{% block title %}
+Crud de productos
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4" id="crud">
+    <h1 class="text-center">CRUD promociones</h1>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">CODIGO</th>
+                <th scope="col">PORCENTAJE</th>
+                <th scope="col">FECHA DE INCIO</th>
+                <th scope="col">FECHA FINAL</th>
+                <th scope="col">ACCIONES</th>
+            </tr>
+            <form action="{% url 'addPromo' %}" method="post">
+                {% csrf_token %}
+                <td><input type="text" name="codigo" placeholder="Codigo" class="form-control"></td>
+                <td><input type="number" name="porcentaje" placeholder="Porcentaje" class="form-control"></td>
+                <td><input type="date" name="fecha_inicio" placeholder="Inicio" class="form-control"></td>
+                <td><input type="date" name="fecha_fin" placeholder="Fin" class="form-control"></td>
+                <td><button class="btn btn-success" type="submit">Añadir promoción</button></td>
+            </form>
+        </thead>
+        <tbody>
+            {% for p in promos %}
+            <tr>
+                <td>{{p.codigo}}</td>
+                <td>{{p.pct}}%</td>
+                <td>{{p.fecha_inicio}}</td>
+                <td>{{p.fecha_fin}}</td>
+                <td>
+                    <a href="" class="btn btn-primary">Modificar</a>
+                    <a href="{% url 'delPromo' p.codigo %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

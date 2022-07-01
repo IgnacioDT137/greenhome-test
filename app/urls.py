@@ -10,4 +10,8 @@ urlpatterns = [
     path('donar', donacion, name='donar'),
     path('loginForm', loginForm, name='loginForm'),
     path('regForm', regForm, name='regForm'),
+    path('crudProd', crudProd, name='crudProd'),
+    path('crudPromo', crudPromo, name='crudPromo'),
+    path('addPromo', addPromo, name='addPromo'),
+    path('delPromo/<code>', delPromo, name='delPromo'),
 ]
