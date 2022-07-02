@@ -30,8 +30,6 @@ $(document).ready(function(){
         } else if($('#passwordinput').val() == ""){
             alert('La contraseña está vacía')
             event.preventDefault()
-        } else {
-            alert('Formulario enviado')
         }
     })
 })

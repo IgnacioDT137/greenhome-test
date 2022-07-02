@@ -44,10 +44,8 @@ $(document).ready(function(){
             alert('La contraseña está vacía')
             event.preventDefault()
         } else if($('#correo').val() == ""){
-            alert('El correo está vacía')
+            alert('El correo está vacío')
             event.preventDefault()
-        } else {
-            alert('Formulario enviado')
-        }
+        } 
     })
 })

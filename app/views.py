@@ -36,7 +36,7 @@ def regForm(request):
     if request.method == 'POST':
         if Usuario.objects.filter(email = request.POST['email']).exists(): 
             messages.success(request, 'El email ingresado ya esta registrado')
-        if Usuario.objects.filter(username = request.POST['username']).exists(): 
+        elif Usuario.objects.filter(username = request.POST['username']).exists(): 
             messages.success(request, 'El usuario ingresado ya esta registrado')
         else:
             newUser = Usuario(
