@@ -11,7 +11,7 @@ class Producto(models.Model):
 
 class Usuario(models.Model):
     username = models.CharField(primary_key=True, max_length=30)
-    email = models.EmailField(null=False)
+    email = models.EmailField(null=False, unique=True)
     pwd = models.CharField(max_length=12, null=False)
 
 class Promocion(models.Model):

@@ -3,6 +3,11 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'app/css/loginStyle.css' %}">
+<style>
+    #logoutdiv {
+        background-color: greenyellow;
+    }
+</style>
 {% endblock %}
 
 {% block title %}
@@ -12,7 +17,14 @@ Iniciar sesión
 {% block content %}
 <script src="{% static 'app/js/loginForm.js' %}"></script>
 <div id="contenido">
-    <form action="" id="form1" method="GET">
+    {% if request.session.username %}
+    <div class="container d-flex flex-column align-items-center mt-4 pt-4 pb-4" id="logoutdiv">
+        <h2>Sesion iniciada como "{{request.session.username}}"</h2>
+        <a href="{% url 'logout' %}" class="btn btn-danger btn-lg">Cerrar sesión</a>
+    </div>
+    {% else %}
+    <form action="" id="form1" method="post">
+        {% csrf_token %}
         <div id="input">
             <h1>Iniciar Sesion</h1>
             <p> </p>
@@ -32,7 +44,13 @@ Iniciar sesión
                 Sesion</button>
             <br>
             <a class="btn btn-primary" href="{% url 'regForm' %}" role="button">Registrarse</a>
+            {% if messages %}
+                {% for m in messages %}
+                <h3>{{m}}</h3>
+                {% endfor %}
+            {% endif %}
         </div>
     </form>
+    {% endif %}
 </div>
 {% endblock %}

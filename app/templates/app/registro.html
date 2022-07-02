@@ -12,29 +12,35 @@ Registrarse
 {% block content %}
 <script src="{% static 'app/js/registro.js' %}"></script>
 <div id="contenido">
-    <form action="" id="form1" method="GET">
+    <form action="" id="form1" method="post">
+        {% csrf_token %}
         <div id="input">
             <h1>Registrarse</h1>
             <p> </p>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">@</span>
                 <input id="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
-                    aria-describedby="basic-addon1">
+                    aria-describedby="basic-addon1" name="username">
             </div>
             <h5 id="mensaje" style="display: none; color: red;">Por favor ingrese usuario</h5>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Correo</span>
                 <input id="correo" type="email" class="form-control" placeholder="Hola@gmail.com"
-                    aria-label="Hola@gmail.com" aria-describedby="basic-addon1">
+                    aria-label="Hola@gmail.com" aria-describedby="basic-addon1" name="email">
             </div>
             <h5 id="mensaje2" style="display: none; color: red;">Por favor ingrese correo</h5>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Contraseña</span>
                 <input id="passwordinput" type="password" class="form-control" placeholder="abc123" aria-label="abc123"
-                    aria-describedby="basic-addon1">
+                    aria-describedby="basic-addon1" name="pwd">
             </div>
             <h5 id="mensaje3" style="display: none; color: red;">Por favor ingrese conraseña</h5>
             <button type="submit" class="btn btn-success">Registrarse</button>   
+            {% if messages %}
+                {% for m in messages %}
+                <h3>{{m}}</h3>
+                {% endfor %}
+            {% endif %}
         </div>
     </form>
 </div>

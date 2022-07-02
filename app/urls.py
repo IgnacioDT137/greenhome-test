@@ -18,4 +18,5 @@ urlpatterns = [
     path('delPro/<code>', delProd, name='delProd'),
     path('editProd/<code>', editProd, name='editProd'),
     path('editPromo/<code>', editPromo, name='editPromo'),
+    path('logout', logout, name='logout'),
 ]

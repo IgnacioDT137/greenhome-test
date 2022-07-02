@@ -38,7 +38,9 @@
         </div>
 
         <div class="menu">
+            {% if request.session.username == 'admin' %}
             <a href="{% url 'cruds' %}"><img src="{% static 'app/img/data.png' %}" alt="CRUD"></a>
+            {% endif %}
             <a href="{% url 'home' %}"><img src="{% static 'app/img/home.png' %}" alt="INICIO"></a>
             <a href="{% url 'historial' %}"><img src="{% static 'app/img/bag.png' %}" alt="COMPRAS"></a>
             <a href="{% url 'carrito' %}"><img src="{% static 'app/img/cart.png' %}" alt="CARRITO"></a>

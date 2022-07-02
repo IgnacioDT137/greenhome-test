@@ -1,4 +1,6 @@
+import email
 from django.shortcuts import redirect, render
+from django.contrib import messages
 from .models import *
 
 # Create your views here.
@@ -20,9 +22,31 @@ def donacion(request):
     return render(request, 'app/donaciones.html')
 
 def loginForm(request):
+    if request.method == 'POST':
+        try:
+            newUser = Usuario.objects.get(username = request.POST['username'], pwd = request.POST['passwordinput'])
+            request.session['username'] = newUser.username 
+            return redirect('home')
+        except Usuario.DoesNotExist as e:
+            messages.success(request, 'Usuario o contraseña incorrectos')
+            return redirect('loginForm')
     return render(request, 'app/login.html')
 
 def regForm(request):
+    if request.method == 'POST':
+        if Usuario.objects.filter(email = request.POST['email']).exists(): 
+            messages.success(request, 'El email ingresado ya esta registrado')
+        if Usuario.objects.filter(username = request.POST['username']).exists(): 
+            messages.success(request, 'El usuario ingresado ya esta registrado')
+        else:
+            newUser = Usuario(
+                username = request.POST['username'],
+                email = request.POST['email'],
+                pwd = request.POST['pwd']
+            )
+            newUser.save()
+            messages.success(request, 'Usuario registrado correctamente')
+            return redirect('loginForm')
     return render(request, 'app/registro.html')
 
 def crudProd(request):
@@ -103,4 +127,8 @@ def editPromo(request, code):
             oldPromo.save()
         return redirect('crudPromo')
     else:        
-        return render(request, 'app/editPromo.html', {"promo":promo})
+        return render(request, 'app/editPromo.html', {"promo":promo})        
+
+def logout(request):
+    del request.session['username']
+    return redirect('loginForm')
