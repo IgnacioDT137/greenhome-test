@@ -13,6 +13,7 @@ class Usuario(models.Model):
     username = models.CharField(primary_key=True, max_length=30)
     email = models.EmailField(null=False, unique=True)
     pwd = models.CharField(max_length=12, null=False)
+    suscrito = models.BooleanField(null=False, default=False)
 
 class Promocion(models.Model):
     id_promocion = models.AutoField(primary_key=True)
