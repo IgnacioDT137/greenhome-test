@@ -19,13 +19,26 @@ def carrito(request):
     return render(request, 'app/carrito.html')
 
 def donacion(request):
-    return render(request, 'app/donaciones.html')
+    if request.method == 'POST':
+        user = Usuario.objects.filter(username = request.session['username']).first()
+        if not user.suscrito:
+            sus = Suscripcion(
+                username = request.session['username'],
+                monto_mensual = request.POST['monto'],
+            )
+            sus.save()
+            user.suscrito = True
+            user.save()
+        return redirect('home')
+    else:
+        return render(request, 'app/donaciones.html')
 
 def loginForm(request):
     if request.method == 'POST':
         try:
             newUser = Usuario.objects.get(username = request.POST['username'], pwd = request.POST['passwordinput'])
             request.session['username'] = newUser.username 
+            request.session['suscrito'] = newUser.suscrito
             return redirect('home')
         except Usuario.DoesNotExist as e:
             messages.success(request, 'Usuario o contraseña incorrectos')
@@ -132,3 +145,6 @@ def editPromo(request, code):
 def logout(request):
     del request.session['username']
     return redirect('loginForm')
+
+#def suscribirse(request):
+    

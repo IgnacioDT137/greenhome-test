@@ -12,7 +12,9 @@ Suscripción para donación
 {% block content %}
 <script src="{% static 'app/js/donacion.js' %}"></script> 
 <div id="contenido">
-    <form action="" id="donar">
+    {% if request.session.suscrito == False%}
+    <form action="" id="donar" method="post">
+        {% csrf_token %}
         <div id="input">
             <h1 style="text-align: center;">Suscripcion para donacion</h1>
             <p> </p>
@@ -24,7 +26,7 @@ Suscripción para donación
             <h5 id="mensaje" style="display: none; color: red;">Por favor ingrese email</h5>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Monto mensual</span>
-                <input id="monto" type="number" class="form-control" aria-label="Sizing example input"
+                <input id="monto" type="number" class="form-control" name="monto" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-default">
             </div>
             <h5 id="mensaje2" style="display: none; color: red;">Por favor ingrese monto</h5>
@@ -46,7 +48,13 @@ Suscripción para donación
                     aria-describedby="inputGroup-sizing-default">
             </div>
             <h5 id="mensaje5" style="display: none; color: red;">Por favor ingrese fecha de vencimiento</h5>
-            <button type="submit" class="btn btn-success" href="donacion.html" role="button">Confirmar</button>
+            <button type="submit" class="btn btn-success" role="button">Confirmar</button>
         </div>
+    </form>
+    {% else %}
+        <div class="container mt-4" style="background-color: greenyellow; color: green; border-radius: 25px;">
+            <h1 class="text-center">Usted ya se encuntra suscrito en nuestra página</h1>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

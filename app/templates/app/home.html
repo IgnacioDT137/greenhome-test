@@ -12,6 +12,8 @@ Inicio
 {% block content %}
 <div id="contenido">
 
+    {% if request.session.username and request.session.username != 'admin' %}
+
     {% for p in productos %}
 
     <div class="producto">
@@ -23,6 +25,13 @@ Inicio
     </div>
 
     {% endfor %}
+
+    {% else %}
+
+    <div class="container mt-4" style="background-color: greenyellow; color: green; border-radius: 25px;">
+        <h3 class="text-center">Por favor, inicia sesion con un usuario valido en la esquina superior derecha para ver nustros productos</h3>
+
+    {% endif %}
 
 </div>
 {% endblock %}
