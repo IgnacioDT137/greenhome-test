@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 # Create your models here.
 
 class Producto(models.Model):
@@ -21,3 +21,9 @@ class Promocion(models.Model):
     pct = models.FloatField(null=False)
     fecha_inicio = models.DateField(null=False)
     fecha_fin = models.DateField(null=False)
+
+class Suscripcion(models.Model):
+    id_suscripcion = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=30)
+    monto_mensual = models.IntegerField(null=False)
+    fecha = models.DateTimeField(null=False, default=datetime.now())
