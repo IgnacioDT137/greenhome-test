@@ -17,7 +17,8 @@ def cruds(request):
 
 #funcion que muestra el historial de compras
 def historial(request):
-    return render(request, 'app/historial.html')
+    compras = Venta.objects.filter(usuario = request.session["username"])
+    return render(request, 'app/historial.html', {"compras":compras})
 
 #funcion que muestra el carrito de compras del usuario
 def carrito(request):

@@ -14,42 +14,13 @@ Mis compras
     <div id="historial">
         <h4>HISTORIAL DE COMPRAS</h4>
     </div>
-    <div id="historial">
-        <h4>Compra realizada el 23/04/2022</h4>
-        <img src="{% static 'app/img/fertilizante.jpg' %}" alt="Fertilizante">
-        <h5>FERTILIZANTE</h5>
-        <p>Precio: $6.000</p>
-        <p>Cantidad: 2</p>
-        <button type="button" class="btn btn-primary">Volver a hacer compra</button>
 
-    </div>
+    {%for c in compras%}
     <div id="historial">
-        <h4>Compra realizada el 20/04/2022</h4>
-        <img src="{% static 'app/img/manguera.jpg' %}" alt="Manguera">
-        <H5>MANGUERA</H5>
-        <p>Precio: $25.000</p>
-        <p>Cantidad: 1</p>
-        <button type="button" class="btn btn-primary">Volver a hacer compra</button>
-
+        <h4>Compra realizada el {{c.fecha}}</h4>                
+        <p>Precio: {{c.total}}</p>
     </div>
-    <div id="historial">
-        <h4>Compra realizada el 24/03/2022</h4>
-        <img src="{% static 'app/img/tanax.jpg' %}" alt="Tanax">
-        <H5>TANAX</H5>
-        <p>Precio: $7.000</p>
-        <p>Cantidad: 3</p>
-        <button type="button" class="btn btn-primary">Volver a hacer compra</button>
-
-    </div>
-    <div id="historial">
-        <h4>Compra realizada el 14/03/2022</h4>
-        <img src="{% static 'app/img/pasto.jpg' %}" alt="Pasto">
-        <H5>SEMILLAS DE PASTO</H5>
-        <p>Precio: 14.000</p>
-        <p>Cantidad: 2</p>
-        <button type="button" class="btn btn-primary">Volver a hacer compra</button>
-
-    </div>
+    {%endfor%}
 
 
 </div>
