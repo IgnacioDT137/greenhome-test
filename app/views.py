@@ -18,6 +18,8 @@ def cruds(request):
 #funcion que muestra el historial de compras
 def historial(request):
     compras = Venta.objects.filter(usuario = request.session["username"])
+    for c in compras:
+        c.fecha = c.fecha.strftime("%d/%m/%Y")
     return render(request, 'app/historial.html', {"compras":compras})
 
 #funcion que muestra el carrito de compras del usuario

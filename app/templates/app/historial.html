@@ -12,13 +12,13 @@ Mis compras
 {% block content %}
 <div id="contenido">
     <div id="historial">
-        <h4>HISTORIAL DE COMPRAS</h4>
+        <h4>HISTORIAL DE COMPRAS DE "{{request.session.username}}"</h4>
     </div>
 
     {%for c in compras%}
     <div id="historial">
         <h4>Compra realizada el {{c.fecha}}</h4>                
-        <p>Precio: {{c.total}}</p>
+        <p>Total: ${{c.total}}</p>
     </div>
     {%endfor%}
 
