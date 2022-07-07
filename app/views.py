@@ -40,6 +40,7 @@ def donacion(request):
             sus.save()
             user.suscrito = True
             user.save()
+            request.session['suscrito'] = user.suscrito
         return redirect('home')
     else:
         return render(request, 'app/donaciones.html')
@@ -205,14 +206,26 @@ def agregarProducto(request, user_id, prod_id):
     return redirect('home')  
 
 def comprar(request, p_total, id_carrito):
-    newVenta = Venta(usuario = request.session['username'], fecha = datetime.now(), total=p_total)
-    newVenta.save()
+    if not request.session['suscrito']:
+        newVenta = Venta(usuario = request.session['username'], fecha = datetime.now(), total=p_total)
+        newVenta.save()
 
-    for item in CarritoItem.objects.filter(id_carrito = id_carrito):
-        item.delete()
+        for item in CarritoItem.objects.filter(id_carrito = id_carrito):
+            item.delete()
 
-    cart = Carrito.objects.get(id_carrito = id_carrito)
-    cart.subtotal = 0
-    cart.save()
+        cart = Carrito.objects.get(id_carrito = id_carrito)
+        cart.subtotal = 0
+        cart.save()
+    else:
+        newVenta = Venta(usuario = request.session['username'], fecha = datetime.now(), total=(float(p_total) * 0.85))
+        newVenta.save()
+
+        for item in CarritoItem.objects.filter(id_carrito = id_carrito):
+            item.delete()
+
+        cart = Carrito.objects.get(id_carrito = id_carrito)
+        cart.subtotal = 0
+        cart.save()
+
 
     return redirect('carrito')
