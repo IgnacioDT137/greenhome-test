@@ -44,4 +44,4 @@ class Venta(models.Model):
     id_venta = models.AutoField(primary_key=True)
     usuario = models.CharField(null=False, max_length=100)
     fecha = models.DateField(null=False)
-    total = models.IntegerField(null=False)
+    total = models.FloatField(null=False)
