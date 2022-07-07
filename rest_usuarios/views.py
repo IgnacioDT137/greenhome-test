@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
-from app.models import Usuario
-from .serializer import UsuarioSerializer
+from app.models import Usuario, Suscripcion
+from .serializer import UsuarioSerializer, SuscripcionSerializer
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework import status
@@ -13,6 +13,13 @@ from rest_framework import status
 def getUsuarios(request):
     usuarios = Usuario.objects.all()
     serializer = UsuarioSerializer(usuarios, many=True)
+    return Response(serializer.data)
+
+@csrf_exempt
+@api_view(['GET'])
+def getSus(request):
+    sus = Suscripcion.objects.all()
+    serializer = SuscripcionSerializer(sus, many=True)
     return Response(serializer.data)
 
 @csrf_exempt
