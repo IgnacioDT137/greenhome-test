@@ -19,4 +19,6 @@ urlpatterns = [
     path('editProd/<code>', editProd, name='editProd'),
     path('editPromo/<code>', editPromo, name='editPromo'),
     path('logout', logout, name='logout'),
+    path('agregarproducto/<user_id>/<prod_id>', agregarProducto, name='add'),   
+    path('comprar/<p_total>/<id_carrito>', comprar, name='comprar'),
 ]

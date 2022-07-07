@@ -2,6 +2,7 @@ import email
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from .models import *
+from datetime import datetime
 
 # Create your views here.
 
@@ -20,7 +21,9 @@ def historial(request):
 
 #funcion que muestra el carrito de compras del usuario
 def carrito(request):
-    return render(request, 'app/carrito.html')
+    cart = Carrito.objects.filter(username=request.session['username'])
+    cartitems = CarritoItem.objects.filter(id_carrito = Carrito.objects.get(username = request.session['username']).id_carrito)
+    return render(request, 'app/carrito.html', {"cartitems":cartitems, "cart":cart})
 
 #funcion que permite a usuario ser suscriptor de la página a cambio de una donacion mensual
 def donacion(request):
@@ -64,6 +67,7 @@ def regForm(request):
                 email = request.POST['email'],
                 pwd = request.POST['pwd']
             )
+            Carrito(username = request.POST['username'], subtotal = 0).save()
             newUser.save()
             messages.success(request, 'Usuario registrado correctamente')
             return redirect('loginForm')
@@ -162,3 +166,50 @@ def logout(request):
     del request.session['username']
     del request.session['suscrito']
     return redirect('loginForm')
+
+def agregarProducto(request, user_id, prod_id):
+    item = CarritoItem.objects.filter(id_carrito = Carrito.objects.get(username = user_id).id_carrito).filter(id_producto = prod_id)
+    if item.exists():
+        prod = Producto.objects.get(id_producto=prod_id)
+        prod.stock -= 1
+        prod.save()
+        item = CarritoItem.objects.get(id_carrito = Carrito.objects.get(username = user_id).id_carrito, id_producto = prod_id)
+        item.cantidad += 1
+        item.subtotal_producto += Producto.objects.get(id_producto = prod_id).precio
+        item.save()
+        #actualizacion de carrito:
+        subt = 0
+        carrito = Carrito.objects.get(username = user_id)
+        items = CarritoItem.objects.filter(id_carrito = carrito.id_carrito)
+        for i in items:
+            subt += i.subtotal_producto
+        carrito.subtotal = subt
+        carrito.save()        
+    else:
+        prod = Producto.objects.get(id_producto=prod_id)
+        prod.stock -= 1
+        prod.save()
+        newItem = CarritoItem(id_carrito = Carrito.objects.get(username = user_id).id_carrito, nombre = Producto.objects.get(id_producto = prod_id).nombre , id_producto = Producto.objects.get(id_producto = prod_id).id_producto, cantidad = 1, subtotal_producto = Producto.objects.get(id_producto = prod_id).precio)
+        newItem.save()
+        #actualizacion de carrito:
+        subt = 0
+        carrito = Carrito.objects.get(username = user_id)
+        items = CarritoItem.objects.filter(id_carrito = carrito.id_carrito)
+        for i in items:
+            subt += i.subtotal_producto
+        carrito.subtotal = subt
+        carrito.save()
+    return redirect('home')  
+
+def comprar(request, p_total, id_carrito):
+    newVenta = Venta(usuario = request.session['username'], fecha = datetime.now(), total=p_total)
+    newVenta.save()
+
+    for item in CarritoItem.objects.filter(id_carrito = id_carrito):
+        item.delete()
+
+    cart = Carrito.objects.get(id_carrito = id_carrito)
+    cart.subtotal = 0
+    cart.save()
+
+    return redirect('carrito')
