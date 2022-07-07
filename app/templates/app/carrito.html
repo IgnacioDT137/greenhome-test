@@ -19,6 +19,16 @@ Carrito de compras
         {% if request.session.suscrito == True %}
         <h5>Tienes un descuento de 15% por ser suscriptor de GreenHome!</h5>
         {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="promocion" placeholder="Codigo de descuento" class="form-control">
+            <button class="btn btn-primary">Canjear código</button>
+        </form>
+        {% if messages %}
+            {% for m in messages %}
+            <h3>{{m}}</h3>
+            {% endfor %}
+        {% endif %}
     </div>
     {% endfor %}
     {% for i in cartitems %}

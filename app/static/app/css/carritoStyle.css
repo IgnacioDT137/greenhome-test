@@ -34,7 +34,7 @@
     align-content: center;
     align-items: center;
     width: 45%;
-    height: 150px;
+    height: 300px;
     border-radius: 25px;
     text-align: center;
     padding: 100px;
@@ -73,7 +73,7 @@
 
     .titulo {
         width: 60%;
-        height: 200px;
+        height: 300px;
         padding: 0;
     }
 }

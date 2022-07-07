@@ -26,7 +26,20 @@ def historial(request):
 def carrito(request):
     cart = Carrito.objects.filter(username=request.session['username'])
     cartitems = CarritoItem.objects.filter(id_carrito = Carrito.objects.get(username = request.session['username']).id_carrito)
-    return render(request, 'app/carrito.html', {"cartitems":cartitems, "cart":cart})
+    if request.method == 'POST':
+        try:
+            promo = Promocion.objects.get(codigo = request.POST['promocion'])
+            if promo.fecha_inicio < datetime.now().date() and promo.fecha_fin > datetime.now().date():
+                cartUpdate = Carrito.objects.filter(username=request.session['username']).first()
+                cartUpdate.subtotal = cartUpdate.subtotal * (1 - (promo.pct * 0.01))
+                cartUpdate.save()
+                promo.delete()
+                return redirect('carrito')
+        except:
+            messages.success(request, 'El código no está disponible')
+            return redirect('carrito')
+    else:
+        return render(request, 'app/carrito.html', {"cartitems":cartitems, "cart":cart})
 
 #funcion que permite a usuario ser suscriptor de la página a cambio de una donacion mensual
 def donacion(request):
