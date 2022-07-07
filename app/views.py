@@ -5,19 +5,24 @@ from .models import *
 
 # Create your views here.
 
+#funcion que muestra los productos de la tienda
 def home(request):
     productos = Producto.objects.all()
     return render(request, 'app/home.html', {"productos":productos})
 
+#funcion que muestra los cruds al usuario adminisistrador
 def cruds(request):
     return render(request, 'app/cruds.html')
 
+#funcion que muestra el historial de compras
 def historial(request):
     return render(request, 'app/historial.html')
 
+#funcion que muestra el carrito de compras del usuario
 def carrito(request):
     return render(request, 'app/carrito.html')
 
+#funcion que permite a usuario ser suscriptor de la página a cambio de una donacion mensual
 def donacion(request):
     if request.method == 'POST':
         user = Usuario.objects.filter(username = request.session['username']).first()
@@ -33,6 +38,7 @@ def donacion(request):
     else:
         return render(request, 'app/donaciones.html')
 
+#funcion que mermite al usuario iniciar sesión
 def loginForm(request):
     if request.method == 'POST':
         try:
@@ -45,6 +51,7 @@ def loginForm(request):
             return redirect('loginForm')
     return render(request, 'app/login.html')
 
+#funcion que permite crear un usuario nuevo
 def regForm(request):
     if request.method == 'POST':
         if Usuario.objects.filter(email = request.POST['email']).exists(): 
@@ -62,14 +69,17 @@ def regForm(request):
             return redirect('loginForm')
     return render(request, 'app/registro.html')
 
+#funcion que muestra el crud de los productos
 def crudProd(request):
     productos = Producto.objects.all()
     return render(request, 'app/crudProd.html', {"productos":productos})
 
+#funcion que muestra el crud de las promociones
 def crudPromo(request):
     promos = Promocion.objects.all()
     return render(request, 'app/crudPromo.html', {"promos":promos})
 
+#funcion que perimite crear una promocion en el crud
 def addPromo(request):
     try:
         code = request.POST['codigo']
@@ -83,11 +93,13 @@ def addPromo(request):
         print('ocurrio un error')
         return redirect('crudPromo')
 
+#funcion que permite borrar una promocion
 def delPromo(request, code):
     promo = Promocion.objects.filter(codigo = code)
     promo.delete()
     return redirect('crudPromo')
 
+#funcion que permite añadir un producto
 def addProducto(request):
     name = request.POST['nombre']
     price = request.POST['precio']
@@ -97,11 +109,13 @@ def addProducto(request):
     newProd.save()
     return redirect('crudProd')        
 
+#funcion que permite borrar un producto
 def delProd(request, code):
     prod = Producto.objects.filter(id_producto = code)
     prod.delete()
     return redirect('crudProd')
 
+#funcion que permite editar un producto existente
 def editProd(request, code):
     producto = Producto.objects.filter(id_producto = code)
     if request.method == 'POST':
@@ -122,6 +136,7 @@ def editProd(request, code):
     else:        
         return render(request, 'app/editProd.html', {"producto":producto})
 
+#funcion que permite editar una promocion existente
 def editPromo(request, code):
     promo = Promocion.objects.filter(id_promocion = code)
     if request.method == 'POST':
@@ -142,9 +157,8 @@ def editPromo(request, code):
     else:        
         return render(request, 'app/editPromo.html', {"promo":promo})        
 
+#funcion que permite cerrar sesión
 def logout(request):
     del request.session['username']
+    del request.session['suscrito']
     return redirect('loginForm')
-
-#def suscribirse(request):
-    
