@@ -16,6 +16,9 @@ Carrito de compras
         <h5>TU CARRITO DE COMPRAS</h5>
         <h5>TOTAL: ${{c.subtotal}}</h5>
         <a href="{% url 'comprar' p_total=c.subtotal id_carrito=c.id_carrito %}" class="btn btn-primary">Realizar Compra</a>
+        {% if request.session.suscrito == True %}
+        <h5>Tienes un descuento de 15% por ser suscriptor de GreenHome!</h5>
+        {% endif %}
     </div>
     {% endfor %}
     {% for i in cartitems %}
