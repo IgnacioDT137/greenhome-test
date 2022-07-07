@@ -242,3 +242,18 @@ def comprar(request, p_total, id_carrito):
 
 
     return redirect('carrito')
+
+def borrarItem(request, id_prod):
+    cart = Carrito.objects.get(username = request.session['username'])
+    item = CarritoItem.objects.filter(id_producto = id_prod, id_carrito = Carrito.objects.get(username = request.session['username']).id_carrito).first()
+    prod = Producto.objects.get(id_producto = id_prod)
+    prod.stock += item.cantidad
+    prod.save()
+    cart.subtotal -= item.subtotal_producto
+    if cart.subtotal < 0:
+        cart.subtotal = 0
+        cart.save()
+    else:    
+        cart.save()
+    item.delete()
+    return redirect('carrito')

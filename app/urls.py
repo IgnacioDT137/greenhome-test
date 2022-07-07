@@ -21,4 +21,5 @@ urlpatterns = [
     path('logout', logout, name='logout'),
     path('agregarproducto/<user_id>/<prod_id>', agregarProducto, name='add'),   
     path('comprar/<p_total>/<id_carrito>', comprar, name='comprar'),
+    path('borrar/<id_prod>', borrarItem, name='borrar')
 ]

@@ -44,6 +44,7 @@ Carrito de compras
             <h5>TOTAL:</h5>
             <h5>{{i.subtotal_producto}}</h5>
         </div>
+        <a class="btn btn-danger" id="btn-borrar" href="{% url 'borrar' i.id_producto %}">Borrar</a>
     </div>
     {% endfor %}
 </div>
