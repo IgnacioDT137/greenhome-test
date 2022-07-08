@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timedelta
 # Create your models here.
 
 class Producto(models.Model):
@@ -44,4 +44,5 @@ class Venta(models.Model):
     id_venta = models.AutoField(primary_key=True)
     usuario = models.CharField(null=False, max_length=100)
     fecha = models.DateField(null=False)
+    fecha_entrega = models.DateField(null=False, default=datetime.now() + timedelta(days=7))
     total = models.FloatField(null=False)

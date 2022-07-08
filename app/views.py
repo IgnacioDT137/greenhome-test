@@ -2,7 +2,7 @@ import email
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from .models import *
-from datetime import datetime
+from datetime import datetime, date
 
 # Create your views here.
 
@@ -20,6 +20,7 @@ def historial(request):
     compras = Venta.objects.filter(usuario = request.session["username"])
     for c in compras:
         c.fecha = c.fecha.strftime("%d/%m/%Y")
+        c.fecha_entrega = c.fecha_entrega.strftime("%d/%m/%Y")
     return render(request, 'app/historial.html', {"compras":compras})
 
 #funcion que muestra el carrito de compras del usuario
@@ -230,7 +231,7 @@ def comprar(request, p_total, id_carrito):
         cart.subtotal = 0
         cart.save()
     else:
-        newVenta = Venta(usuario = request.session['username'], fecha = datetime.now(), total=(float(p_total) * 0.85))
+        newVenta = Venta(usuario = request.session['username'], fecha = datetime.now(), total=(float(p_total) * 0.95))
         newVenta.save()
 
         for item in CarritoItem.objects.filter(id_carrito = id_carrito):
